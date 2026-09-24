@@ -1,0 +1,7 @@
+{
+  "description": {
+    "message": "Save and restore windows, tabs and groups. Search sessions and keep local backups. No account or cloud."
+  },
+  "saveCommand": { "message": "Save all normal windows locally" },
+  "libraryCommand": { "message": "Open your saved sessions" }
+}

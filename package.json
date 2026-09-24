@@ -1,0 +1,38 @@
+{
+  "name": "tabcarry",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Save your tabs. Pick up where you left off.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm run format:check && npm test",
+    "build": "npm run typecheck && vite build",
+    "release": "npm run build && node scripts/package.mjs",
+    "test:chrome": "node tests/chrome.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "lucide-react": "^0.468.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/chrome": "^0.0.326",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^26.1.0",
+    "playwright": "^1.55.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.8.0",
+    "vite": "^6.3.0",
+    "vitest": "^5.0.1"
+  }
+}

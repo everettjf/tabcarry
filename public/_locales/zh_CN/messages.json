@@ -1,0 +1,7 @@
+{
+  "description": {
+    "message": "保存和恢复窗口、标签页与分组。搜索会话，导入导出本地备份。无需账号或云端。"
+  },
+  "saveCommand": { "message": "保存所有普通窗口到本地" },
+  "libraryCommand": { "message": "打开已保存的会话" }
+}
