@@ -3,85 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Privacy — TabCarry</title>
+    <title>Privacy policy — TabCarry</title>
+    <meta
+      name="description"
+      content="How TabCarry stores sessions locally, handles browser permissions and keeps you in control of backups."
+    />
+    <link rel="canonical" href="https://xnu.app/tabcarry/privacy/" />
+    <link rel="icon" href="../assets/icon.png" />
     <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
-    <main>
-      <a href="../">← TabCarry</a>
-      <h1>TabCarry Privacy Policy</h1>
-      <p>Effective September 24, 2026 · Version 1.0.0</p>
-      <p>
-        TabCarry saves browser tab sessions locally. It does not have an account
-        system, developer-operated backend, advertising, analytics or cloud
-        synchronization. It does not send saved page titles or URLs to the
-        developer. The extension uses bundled icons and domain initials rather
-        than requesting a remote favicon service.
-      </p>
-      <h2>Data stored on your device</h2>
-      <p>
-        Sessions are stored in the extension’s IndexedDB database. They include
-        session names, timestamps, page titles, full URLs, tab order, window
-        structure, pinned and active states, tab-group metadata, favorites and
-        deletion timestamps. Restore reports contain the session data needed to
-        complete a restore, browser tab/window IDs for that operation, status
-        and errors. Preferences are stored in chrome.storage.local. A temporary
-        identifier in chrome.storage.session prevents old browser tab references
-        from being reused after a restart or extension reload.
-      </p>
-      <p>
-        Saved sessions remain until you delete them. Deleted sessions are kept
-        in the trash for up to 30 days and are cleared when the extension next
-        checks the library; you can also permanently delete them earlier.
-        Restore reports are separate local records: dismiss a completed, stopped
-        or interrupted report to remove it. Removing a session does not remove
-        an existing restore report for that session. Exported backup files are
-        separate copies that you control.
-      </p>
-      <p>
-        Uninstalling or clearing extension data can remove this information.
-        Export an independent backup first. Data is local but is not encrypted
-        by TabCarry; someone with access to your browser profile or backup files
-        may be able to read it.
-      </p>
-      <h2>Actions you control</h2>
-      <p>
-        Saving reads tab information from normal windows in your current browser
-        profile. Incognito windows and TabCarry’s own pages are excluded. Saving
-        does not close pages unless you explicitly choose Save and close tabs.
-        TabCarry does not read page contents, form fields, cookies, passwords or
-        browsing history.
-      </p>
-      <p>
-        Opening saved pages contacts their websites as ordinary browser
-        navigation. Those websites have their own privacy policies. Import reads
-        a JSON file you choose. Export downloads a JSON file containing your
-        saved sessions and trash, or a selected session; restore reports and
-        preferences are not included. Copy URL writes the selected URL to the
-        system clipboard. The extension does not synchronize these records; your
-        browser or operating system may have separate synchronization or backup
-        behavior.
-      </p>
-      <h2>Permissions</h2>
-      <p>
-        tabs: read titles, URLs and tab state to capture sessions, and open,
-        update or close tabs when requested.
-      </p>
-      <p>
-        tabGroups: read and restore group names, colors and collapsed state.
-      </p>
-      <p>storage: save local preferences.</p>
-      <p>
-        No host permissions or content scripts are requested. Website contents
-        and login sessions are not backed up or restored.
-      </p>
-      <h2>Contact</h2>
-      <p>
-        Contact the developer at xnuapp@gmail.com or through
-        https://github.com/everettjf/tabcarry/issues. Do not attach personal
-        session backups or sensitive URLs to public issues.
-      </p>
-      <footer>TabCarry · By Everett</footer>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header wrap">
+      <a class="brand" href="../"
+        ><img
+          src="../assets/icon.png"
+          width="32"
+          height="32"
+          alt=""
+        />TabCarry</a
+      >
+      <nav aria-label="Main navigation">
+        <a href="../">Back to TabCarry <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main" class="policy wrap">
+      <p class="eyebrow">YOUR DATA, YOUR DEVICE</p>
+      {{policy}}
+      <aside class="hosting-note">
+        <h2>About this website</h2>
+        <p>
+          This product website is hosted on GitHub Pages. Hosting providers
+          process normal web requests under their own policies. This site adds
+          no analytics, account system or third-party fonts. Its hosting is
+          separate from the local storage used by the TabCarry extension.
+        </p>
+        <a
+          href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+          rel="noopener noreferrer"
+          >GitHub privacy statement ↗</a
+        >
+      </aside>
     </main>
+    <footer class="footer wrap">
+      <a class="brand" href="../">TabCarry</a
+      ><span
+        >Made by
+        <a href="https://xnu.app/" rel="noopener noreferrer">Everett</a></span
+      ><a href="mailto:xnuapp@gmail.com">Contact</a>
+    </footer>
   </body>
 </html>

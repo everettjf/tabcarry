@@ -3,3 +3,4 @@ dist/
 releases/
 public/icons/*.png
 docs/store/*.png
+.site/

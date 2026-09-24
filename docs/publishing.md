@@ -51,7 +51,9 @@ Disclosures must accurately reflect local processing of page titles and full URL
 - Icons: `public/icons/128.png` and the smaller sizes.
 - Screenshots: `docs/store/` (actual extension UI with demonstration records; not real personal sessions).
 - Product/policy HTML: `docs/site/index.html`, `docs/site/privacy/index.html`.
-- Publish **docs/site/** as the website root before using its public privacy URL. Proposed URL: `https://xnu.app/tabcarry/privacy/`; it is not provisioned by this task.
+- Product URL: https://xnu.app/tabcarry/
+- Privacy URL: https://xnu.app/tabcarry/privacy/
+- `.github/workflows/pages.yml` builds and deploys `.site/` on pushes to `main`. Run `npm run release` and `npm run site:build` locally. The policy page is generated from `PRIVACY_POLICY.md`; screenshots and the installable ZIP are included automatically.
 - Developer dashboard: https://chrome.google.com/webstore/devconsole/
 - Official instructions: https://developer.chrome.com/docs/webstore/publish
 

@@ -4,6 +4,8 @@
 
 A local-only Chrome extension for saving and restoring browser windows, tabs and groups. No account, cloud sync, analytics, remote favicons or content scripts.
 
+[Website](https://xnu.app/tabcarry/) · [Privacy policy](https://xnu.app/tabcarry/privacy/)
+
 ## What you can do
 
 - Save all normal windows, the current window, or selected tabs with one click.
@@ -57,3 +59,7 @@ The browser test creates its own temporary Chrome for Testing profile and local 
 - [Store publishing checklist](docs/publishing.md)
 
 **Release status:** 1.0.0 built and tested locally; not yet submitted to Chrome Web Store. Automatic snapshots, updating existing sessions and competitor imports are future work.
+
+## Product website
+
+The GitHub Pages workflow builds and deploys `.site/` on each push to `main`. Edit `docs/site/` for the website and `PRIVACY_POLICY.md` for the policy. Run `npm run release` followed by `npm run site:build` to build locally. The build includes actual UI screenshots and the current installable ZIP.

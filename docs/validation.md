@@ -45,6 +45,10 @@ Screenshots in `docs/store/` show the actual extension with demonstration record
 
 ## Remaining release validation
 
-The planned seven-day personal-use trial has **not** happened. Automated testing used the stated Chrome for Testing version, not every supported Chrome release, OS or extension combination. Chrome Web Store submission/review and public privacy-page deployment are not included in this completed build.
+The planned seven-day personal-use trial has **not** happened. Automated testing used the stated Chrome for Testing version, not every supported Chrome release, OS or extension combination. Chrome Web Store submission/review is not included in this completed build.
 
 Automatic snapshots, updating an existing session, competitor-format migration, exact monitor geometry, shared-group relationships, page contents and login-state restoration are not included in 1.0.0.
+
+## Product website validation
+
+The generated site passed isolated-browser checks at desktop and 390px mobile widths, including dark mode, FAQ interaction, privacy content, local links and ZIP download. No horizontal overflow, unresolved template placeholders, failed asset requests or page errors were found. The website uses local assets and no client-side scripts, analytics or third-party fonts.

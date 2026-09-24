@@ -6,55 +6,280 @@
     <title>TabCarry — Save your tabs. Come back ready.</title>
     <meta
       name="description"
-      content="A simple, local-only Chrome extension for saving and restoring windows, tabs and groups."
+      content="Save and restore Chrome windows, tabs and groups with a clean, local-only session manager. No account. No cloud."
     />
+    <link rel="canonical" href="https://xnu.app/tabcarry/" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="TabCarry — Save your tabs. Come back ready."
+    />
+    <meta
+      property="og:description"
+      content="A little room for later. Save your browser sessions locally and pick up where you left off."
+    />
+    <meta property="og:url" content="https://xnu.app/tabcarry/" />
+    <meta
+      property="og:image"
+      content="https://xnu.app/tabcarry/assets/library-light.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#315ccd" />
+    <link rel="icon" href="assets/icon.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main>
-      <nav>
-        <b>TabCarry</b><a href="privacy/">Privacy</a
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="header wrap">
+      <a class="brand" href="./"
+        ><img src="assets/icon.png" width="32" height="32" alt="" /><span
+          >TabCarry</span
+        ></a
+      >
+      <nav aria-label="Main navigation">
+        <a href="#features">Features</a><a href="privacy/">Privacy</a
         ><a
           href="https://github.com/everettjf/tabcarry"
           rel="noopener noreferrer"
-          >GitHub</a
+          >GitHub <span aria-hidden="true">↗</span></a
         >
       </nav>
-      <h1>Save your tabs.<br />Come back ready.</h1>
-      <p>
-        Leave a little room for later. Save the windows and tabs you have open,
-        then pick up where you left off.
-      </p>
-      <p>
-        <a
-          class="button"
-          href="https://github.com/everettjf/tabcarry#install-locally"
-          rel="noopener noreferrer"
-          >Install locally</a
+    </header>
+    <main id="main">
+      <section class="hero wrap">
+        <p class="eyebrow">
+          <span class="status-dot" aria-hidden="true"></span> A SIMPLE CHROME
+          EXTENSION
+        </p>
+        <h1>Save your tabs.<br /><span>Come back ready.</span></h1>
+        <p class="intro">
+          Good work doesn’t always happen in one sitting.<br
+            class="desktop-break"
+          />
+          Save your open windows and tabs. Continue when you’re ready.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="downloads/TabCarry.zip" download
+            >Download TabCarry <span aria-hidden="true">↓</span></a
+          ><a class="button" href="#install"
+            >How to install <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <p class="release-note">
+          v{{version}} · Free · Local installation · Chrome 120+
+        </p>
+        <div class="promises">
+          <span><i aria-hidden="true">✓</i> No account</span
+          ><span><i aria-hidden="true">✓</i> No cloud</span
+          ><span><i aria-hidden="true">✓</i> Your tabs, on your device</span>
+        </div>
+      </section>
+      <figure class="product-shot wrap">
+        <div class="window-top" aria-hidden="true">
+          <span></span><span></span><span></span><b>A little room for later.</b>
+        </div>
+        <picture
+          ><source
+            srcset="assets/library-dark.png"
+            media="(prefers-color-scheme: dark)" />
+          <img
+            src="assets/library-light.png"
+            width="1280"
+            height="800"
+            alt="TabCarry’s session library: saved sessions on the left, searchable tabs and Chrome groups on the right."
+            fetchpriority="high"
+        /></picture>
+        <figcaption>
+          Actual TabCarry interface with example sessions.
+        </figcaption>
+      </figure>
+      <section class="section wrap" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">LESS TO MANAGE</p>
+          <h2>Keep the context.<br />Clear some space.</h2>
+          <p>
+            Small, thoughtful controls for the tabs you want to come back to.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <span class="feature-icon" aria-hidden="true">▤</span>
+            <h3>Save your working set</h3>
+            <p>
+              All windows, this window, or selected tabs. Keep their order,
+              pinned tabs and native Chrome groups together.
+            </p>
+          </article>
+          <article>
+            <span class="feature-icon" aria-hidden="true">↗</span>
+            <h3>Open just what you need</h3>
+            <p>
+              Reopen the original windows, add tabs to your current window, or
+              choose a few pages. Your saved session stays put.
+            </p>
+          </article>
+          <article>
+            <span class="feature-icon" aria-hidden="true">⌕</span>
+            <h3>Find your way back</h3>
+            <p>
+              Search session names, page titles and URLs. Rename sessions and
+              favorite the ones you use most.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section class="restore-section wrap">
+        <div>
+          <p class="eyebrow">PICK UP WHERE YOU LEFT OFF</p>
+          <h2>Your next step.<br />Clearly marked.</h2>
+          <p>
+            Choose where your tabs open before restoring. Existing pages stay
+            open, and progress reports tell you what happened.
+          </p>
+          <ul class="check-list">
+            <li>Restore a session, window, group or selected pages</li>
+            <li>Optionally skip URLs already open in the destination</li>
+            <li>Stop opening more tabs or retry unfinished items</li>
+          </ul>
+        </div>
+        <figure>
+          <img
+            src="assets/restore.png"
+            width="1280"
+            height="800"
+            alt="Restore dialog showing the choice between original windows and adding tabs to the current window."
+            loading="lazy"
+          />
+        </figure>
+      </section>
+      <section class="privacy-panel wrap">
+        <div class="privacy-symbol" aria-hidden="true">⌂</div>
+        <div>
+          <p class="eyebrow">LOCAL BY DESIGN</p>
+          <h2>A home for your tabs.<br />On your own device.</h2>
+          <p>
+            No sign-in, analytics or remote favicon requests. Export a JSON
+            backup you control, and recover deleted sessions from a 30-day
+            trash.
+          </p>
+          <a class="text-link" href="privacy/"
+            >Read the privacy policy <span aria-hidden="true">→</span></a
+          >
+        </div>
+      </section>
+      <section class="section wrap" id="install">
+        <div class="section-heading">
+          <p class="eyebrow">GET STARTED</p>
+          <h2>Make room for later.</h2>
+          <p>
+            TabCarry is ready for local installation. A Chrome Web Store listing
+            is not available yet.
+          </p>
+        </div>
+        <ol class="steps">
+          <li>
+            <span>01</span>
+            <h3>Download &amp; unzip</h3>
+            <p>
+              <a href="downloads/TabCarry.zip" download
+                >Download v{{version}}</a
+              >
+              and extract the ZIP into a folder you’ll keep.
+            </p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>Load in Chrome</h3>
+            <p>
+              Open <code>chrome://extensions</code>, turn on
+              <strong>Developer mode</strong>, then choose
+              <strong>Load unpacked</strong> and select the extracted folder.
+            </p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>Save your first session</h3>
+            <p>
+              Pin TabCarry to the toolbar. Click it, choose your save scope and
+              save. Your current tabs stay open.
+            </p>
+          </li>
+        </ol>
+        <p class="install-note">
+          Already installed? Keep the same extension folder and replace its
+          files before reloading. Export a backup before uninstalling or moving
+          to another profile.
+        </p>
+      </section>
+      <section class="faq wrap">
+        <div>
+          <p class="eyebrow">A FEW GOOD QUESTIONS</p>
+          <h2>Before you start.</h2>
+        </div>
+        <div>
+          <details>
+            <summary>What does a session include?</summary>
+            <p>
+              Page titles and full URLs, window structure, tab order, pinned and
+              active tabs, and tab-group names, colors and collapsed state.
+              TabCarry does not save page contents, unsent forms, cookies, login
+              sessions, scroll positions or media progress.
+            </p>
+          </details>
+          <details>
+            <summary>Can I use it offline?</summary>
+            <p>
+              You can save and manage the tab information already available in
+              your browser while offline. Loading saved websites may need an
+              internet connection. Only HTTP and HTTPS pages reopen
+              automatically; other saved URLs can be copied manually.
+            </p>
+          </details>
+          <details>
+            <summary>What happens if I uninstall it?</summary>
+            <p>
+              Local extension data can be removed. Export an independent JSON
+              backup first. You can later import that backup into TabCarry.
+              Backup files contain full URLs and titles, so keep them private.
+            </p>
+          </details>
+          <details>
+            <summary>Does saving close my tabs?</summary>
+            <p>
+              Ordinary Save leaves tabs open. Save and close is a separate
+              action with a confirmation. TabCarry writes the snapshot before
+              closing eligible tabs; it cannot preserve unsent form input.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section class="closing wrap">
+        <h2>Leave it here.<br />Come back to it.</h2>
+        <a class="button primary" href="downloads/TabCarry.zip" download
+          >Download TabCarry <span aria-hidden="true">↓</span></a
         >
-      </p>
-      <p>No account. No cloud. Your sessions stay on your device.</p>
-      <h2>Keep the shape of your work</h2>
-      <p>
-        Preserve windows, tab order, pinned tabs and native Chrome groups.
-        Reopen the whole session or choose just the pages you need.
-      </p>
-      <h2>Find it. Open it. Keep it.</h2>
-      <p>
-        Search by session name, page title or URL. Favorite what matters.
-        Recover deleted sessions from a 30-day trash.
-      </p>
-      <h2>A backup you can take with you</h2>
-      <p>
-        Export your sessions to JSON. Import them with a preview. Keep an
-        independent backup before uninstalling or clearing extension data.
-      </p>
-      <footer>
-        Version 1.0.0 · Available for local installation. Not yet listed in
-        Chrome Web Store.<br />TabCarry saves URLs and browser structure, not
-        unsent forms, page contents or login sessions.<br />By Everett ·
-        <a href="mailto:xnuapp@gmail.com">Contact</a>
-      </footer>
+        <p>Free · No account required</p>
+      </section>
     </main>
+    <footer class="footer wrap">
+      <a class="brand" href="./"
+        ><img src="assets/icon.png" width="24" height="24" alt="" />TabCarry</a
+      ><span
+        >Made by
+        <a href="https://xnu.app/" rel="noopener noreferrer">Everett</a></span
+      >
+      <nav aria-label="Footer navigation">
+        <a href="privacy/">Privacy</a
+        ><a
+          href="https://github.com/everettjf/tabcarry/issues"
+          rel="noopener noreferrer"
+          >Support</a
+        ><a
+          href="https://github.com/everettjf/tabcarry"
+          rel="noopener noreferrer"
+          >Source ↗</a
+        >
+      </nav>
+    </footer>
   </body>
 </html>

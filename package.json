@@ -13,7 +13,8 @@
     "release": "npm run build && node scripts/package.mjs",
     "test:chrome": "node tests/chrome.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "site:build": "node scripts/build-site.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
