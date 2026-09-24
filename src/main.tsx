@@ -91,11 +91,13 @@ function Dialog({
   onClose,
   children,
   busy,
+  closeLabel,
 }: {
   title: string;
   onClose: () => void;
   children: React.ReactNode;
   busy: boolean;
+  closeLabel: string;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -105,17 +107,18 @@ function Dialog({
   return (
     <dialog
       ref={ref}
+      aria-labelledby="dialog-title"
       onCancel={(e) => {
         e.preventDefault();
         if (!busy) onClose();
       }}
     >
       <div className="dialog-head">
-        <h2>{title}</h2>
+        <h2 id="dialog-title">{title}</h2>
         <button
           className="icon"
           disabled={busy}
-          aria-label="Close"
+          aria-label={closeLabel}
           onClick={onClose}
         >
           <X size={18} />
@@ -1202,6 +1205,7 @@ function App() {
       {modal && (
         <Dialog
           title={modalTitle}
+          closeLabel={t("close")}
           onClose={() => setModal(undefined)}
           busy={busy}
         >

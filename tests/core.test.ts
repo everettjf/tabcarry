@@ -8,6 +8,7 @@ import {
   writeMany,
   update,
   removeMany,
+  removeExpiredSessions,
 } from "../src/db";
 import { supported, matches, type Session } from "../src/model";
 const sample = (): Session => ({
@@ -153,4 +154,24 @@ describe("transactional storage", () => {
     expect(results.filter((r) => r.status === "fulfilled")).toHaveLength(1);
     expect((await read<Session>("sessions", "s1"))?.revision).toBe(2);
   });
+});
+
+it("expiry keeps restored and recent sessions and removes only expired trash", async () => {
+  await writeMany("sessions", [
+    { ...sample(), id: "expired", deletedAt: 1 },
+    { ...sample(), id: "restored", deletedAt: 1 },
+    { ...sample(), id: "recent", deletedAt: 100 },
+    { ...sample(), id: "live" },
+  ]);
+  // Both operations are issued together: cleanup must observe the committed restore.
+  const restore = update<Session>("sessions", "restored", (session) => {
+    delete session.deletedAt;
+    return session;
+  });
+  await Promise.all([restore, removeExpiredSessions(50)]);
+  expect((await readAll<Session>("sessions")).map((s) => s.id).sort()).toEqual([
+    "live",
+    "recent",
+    "restored",
+  ]);
 });

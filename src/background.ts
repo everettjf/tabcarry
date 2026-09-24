@@ -1,4 +1,11 @@
-import { read, readAll, writeMany, update, removeMany } from "./db";
+import {
+  read,
+  readAll,
+  writeMany,
+  update,
+  removeMany,
+  removeExpiredSessions,
+} from "./db";
 import { capture, queryScope, resolveTarget } from "./capture";
 import { encode, parseBackup, mergeBackup } from "./backup";
 import {
@@ -66,14 +73,10 @@ async function handle(c: Command): Promise<unknown> {
     );
   switch (c.type) {
     case "list": {
-      const sessions = await readAll<Session>("sessions");
-      const expired = sessions
-        .filter((s) => s.deletedAt && s.deletedAt < Date.now() - 30 * 86400000)
-        .map((s) => s.id);
-      if (expired.length) await serial(() => removeMany("sessions", expired));
-      return sessions
-        .filter((s) => !expired.includes(s.id))
-        .sort((a, b) => b.createdAt - a.createdAt);
+      await removeExpiredSessions(Date.now() - 30 * 86400000);
+      return (await readAll<Session>("sessions")).sort(
+        (a, b) => b.createdAt - a.createdAt,
+      );
     }
     case "jobs":
       return (await readAll<Job>("jobs")).sort(

@@ -95,3 +95,25 @@ export async function update<T extends Session | Job>(
     };
   });
 }
+
+// Check expiry and delete within one transaction so a concurrent restore cannot
+// be removed using a stale list captured before that restore committed.
+export async function removeExpiredSessions(cutoff: number): Promise<void> {
+  const db = await database();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction("sessions", "readwrite");
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () =>
+      reject(tx.error || new Error("Storage transaction aborted"));
+    const request = tx.objectStore("sessions").openCursor();
+    request.onsuccess = () => {
+      const cursor = request.result;
+      if (!cursor) return;
+      const session = cursor.value as Session;
+      if (session.deletedAt !== undefined && session.deletedAt < cutoff)
+        cursor.delete();
+      cursor.continue();
+    };
+  });
+}

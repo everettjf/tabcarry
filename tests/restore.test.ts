@@ -110,7 +110,7 @@ beforeEach(async () => {
       group: vi.fn(async (p: any) => {
         if (p.groupId) return p.groupId;
         const id = nextGroup++;
-        groups.set(id, {});
+        groups.set(id, { windowId: p.createProperties.windowId });
         return id;
       }),
     },
@@ -294,4 +294,28 @@ it("leaves a created tab unchanged when the user navigated it before retry", asy
   await retryRestore("j");
   expect((await finished("j")).items[0].state).toBe("unknown");
   expect(tabs.get(tabId).url).toBe("https://user-work.test");
+});
+
+it("does not pull later tabs into a group moved to another window", async () => {
+  const session = s();
+  session.windows[0].tabs[1].pinned = false;
+  session.windows[0].tabs[1].groupRef = "g";
+  vi.mocked(chrome.tabGroups.get).mockImplementation(async (id: number) => {
+    const group = groups.get(id);
+    if (id === 1) group.windowId = 99;
+    return group;
+  });
+  await startRestore(
+    session,
+    { mode: "original", target: {}, skipExisting: false },
+    "moved",
+  );
+  const job = await finished("moved");
+  expect(job.items.slice(0, 2).map((i) => i.state)).toEqual(["done", "done"]);
+  expect(chrome.tabs.group).not.toHaveBeenCalledWith(
+    expect.objectContaining({ groupId: 1 }),
+  );
+  expect(groups.size).toBe(2);
+  expect(groups.get(1).collapsed).toBeUndefined();
+  expect(groups.get(2).windowId).toBe(job.windowMap.w);
 });

@@ -4,7 +4,7 @@ Date: 2026-09-24. This report distinguishes isolated browser tests from ongoing 
 
 ## Automated tests
 
-29 tests cover:
+31 tests cover:
 
 - JSON round trips: windows, groups, ordering, pinned/active states, unsupported URLs, timestamps and trash.
 - Malformed JSON, future schemas, oversized input, duplicate IDs and missing group references.
@@ -52,3 +52,9 @@ Automatic snapshots, updating an existing session, competitor-format migration, 
 ## Product website validation
 
 The generated site passed isolated-browser checks at desktop and 390px mobile widths, including dark mode, FAQ interaction, privacy content, local links and ZIP download. No horizontal overflow, unresolved template placeholders, failed asset requests or page errors were found. The website uses local assets and no client-side scripts, analytics or third-party fonts.
+
+## Pre-release review — 2026-09-24
+
+Fixed two edge cases found during source review: expired-trash cleanup now checks and deletes within one IndexedDB transaction, preserving a restore that commits first; restore checks the destination of an existing native tab group before adding further tabs, and does not change the collapsed state of a group moved to another window. Regression tests cover both cases. Dialogs now expose their title to assistive technology and localize the close button.
+
+After these changes, all 31 tests, TypeScript, formatting, release packaging and the isolated native Chrome acceptance suite passed. The latter again covered 500-tab search/render, 100-tab restore, backup round trips and browser restart persistence. This remains automated validation, not a completed daily-use trial or an exhaustive security audit.

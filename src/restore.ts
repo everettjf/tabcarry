@@ -243,7 +243,8 @@ export async function runRestore(id: string) {
           let gid: number | undefined = job.groupMap[item.tab.groupRef];
           if (gid !== undefined) {
             try {
-              await chrome.tabGroups.get(gid);
+              const group = await chrome.tabGroups.get(gid);
+              if (group.windowId !== windowId) gid = undefined;
             } catch {
               gid = undefined;
             }
@@ -302,7 +303,15 @@ export async function runRestore(id: string) {
         const gid = job.groupMap[group.id];
         if (gid !== undefined) {
           try {
-            await chrome.tabGroups.update(gid, { collapsed: group.collapsed });
+            const current = await chrome.tabGroups.get(gid);
+            const destination =
+              job.options.mode === "original"
+                ? job.windowMap[w.id]
+                : job.options.target.windowId;
+            if (current.windowId === destination)
+              await chrome.tabGroups.update(gid, {
+                collapsed: group.collapsed,
+              });
           } catch (e) {
             await patch(id, (j) => {
               j.warnings.push(errorText(e));
