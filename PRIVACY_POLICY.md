@@ -1,6 +1,6 @@
 # TabCarry Privacy Policy
 
-Effective September 24, 2026 · Version 1.0.0
+Effective September 24, 2026 · Version 1.0.1
 
 TabCarry saves browser tab sessions locally. It does not have an account system, developer-operated backend, advertising, analytics or cloud synchronization. It does not send saved page titles or URLs to the developer. The extension uses bundled icons and domain initials rather than requesting a remote favicon service.
 

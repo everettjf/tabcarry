@@ -1468,7 +1468,7 @@ function App() {
                 <Download size={16} />
                 {t("export")}
               </button>
-              <p className="version">TabCarry 1.0.0 · {t("local")}</p>
+              <p className="version">TabCarry 1.0.1 · {t("local")}</p>
             </>
           )}
           {modal.kind === "privacy" && (

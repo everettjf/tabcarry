@@ -6,9 +6,13 @@ rmSync(`releases/TabCarry-${version}.zip`, { force: true });
 const manifest = JSON.parse(readFileSync("dist/manifest.json", "utf8"));
 if (manifest.version !== version)
   throw Error("Manifest/package version mismatch");
-execFileSync("zip", ["-qr", `../releases/TabCarry-${version}.zip`, "."], {
-  cwd: "dist",
-});
+execFileSync(
+  "zip",
+  ["-qr", `../releases/TabCarry-${version}.zip`, ".", "-x", "*.DS_Store"],
+  {
+    cwd: "dist",
+  },
+);
 execFileSync("unzip", ["-t", `releases/TabCarry-${version}.zip`], {
   stdio: "inherit",
 });

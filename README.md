@@ -4,11 +4,11 @@
 
 A local-only Chrome extension for saving and restoring browser windows, tabs and groups. No account, cloud sync, analytics, remote favicons or content scripts.
 
-[Website](https://xnu.app/tabcarry/) · [Privacy policy](https://xnu.app/tabcarry/privacy/)
+[Chrome Web Store](https://chromewebstore.google.com/detail/tabcarry-%E2%80%94-save-restore-t/eemmceflpbemalamboiahniolcgalpfl) · [Website](https://xnu.app/tabcarry/) · [Privacy policy](https://xnu.app/tabcarry/privacy/)
 
 ## What you can do
 
-- Save all normal windows, the current window, or selected tabs with one click.
+- Save all normal windows or the current window with one click.
 - Keep window structure, tab order, pinned tabs, active tabs and native tab-group metadata.
 - Reopen a session in new windows, append to the original window, or restore selected tabs and groups.
 - Open an individual page in a new tab or explicitly replace the original tab.
@@ -28,7 +28,7 @@ A local-only Chrome extension for saving and restoring browser windows, tabs and
 
 Chrome 120+ is required. Configure keyboard shortcuts at `chrome://extensions/shortcuts`. The suggested save shortcut is **Alt+Shift+S**.
 
-`npm run release` creates `releases/TabCarry-1.0.0.zip` with the manifest at its root. This ZIP is the Chrome Web Store upload package; unpack it before using **Load unpacked**.
+`npm run release` creates `releases/TabCarry-1.0.1.zip` with the manifest at its root. This ZIP is the Chrome Web Store upload package; unpack it before using **Load unpacked**.
 
 ## Data and limits
 
@@ -36,7 +36,7 @@ Sessions and restore reports are stored in extension-local IndexedDB. Preference
 
 TabCarry restores URLs and browser structure, not login tokens, cookies, unsent forms, page contents, back/forward history, scroll positions or media playback. Website loading and existing login state depend on the browser and the website. Management works offline; loading websites may require a connection.
 
-Only HTTP and HTTPS URLs reopen automatically in 1.0.0. Other saved URLs remain available for copying and backup. Incognito and the extension’s own pages are excluded. Large restores require confirmation; original browser IDs, exact display geometry and shared-group collaboration are not restored.
+Only HTTP and HTTPS URLs reopen automatically. Other saved URLs remain available for copying and backup. Incognito and the extension’s own pages are excluded. Large restores require confirmation; original browser IDs, exact display geometry and shared-group collaboration are not restored.
 
 A restored tab count means Chrome created/navigated the tab, not that the website loaded successfully. On interruption, check any items marked uncertain before opening them again. Already opened tabs are not closed by Stop.
 
@@ -58,7 +58,7 @@ The browser test creates its own temporary Chrome for Testing profile and local 
 - [Privacy policy](PRIVACY_POLICY.md)
 - [Store publishing checklist](docs/publishing.md)
 
-**Release status:** 1.0.0 built and tested locally; not yet submitted to Chrome Web Store. Automatic snapshots, updating existing sessions and competitor imports are future work.
+**Release status:** 1.0.0 is on Chrome Web Store. Version 1.0.1 is prepared for the next upload. Automatic snapshots, updating existing sessions and competitor imports are future work.
 
 ## Product website
 

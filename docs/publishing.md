@@ -1,6 +1,6 @@
-# Publishing TabCarry 1.0.0
+# Publishing TabCarry 1.0.1
 
-Status: source and ZIP prepared. No Chrome Web Store item has been created or submitted by this task.
+Status: version 1.0.0 is published. Upload version 1.0.1 to the existing TabCarry item.
 
 ## Build
 
@@ -10,7 +10,7 @@ npm run check
 npm run release
 ```
 
-Upload `releases/TabCarry-1.0.0.zip`, not the repository ZIP. The package must contain `manifest.json` at its root. A subsequent upload must use a higher version in both package.json and public/manifest.json, and any displayed version strings.
+Upload `releases/TabCarry-1.0.1.zip` to the existing item's Package tab, not the repository ZIP. The package must contain `manifest.json` at its root. A subsequent upload must use a higher version in both package.json and public/manifest.json, and any displayed version strings.
 
 ## Store copy
 
@@ -53,6 +53,7 @@ Disclosures must accurately reflect local processing of page titles and full URL
 - Product/policy HTML: `docs/site/index.html`, `docs/site/privacy/index.html`.
 - Product URL: https://xnu.app/tabcarry/
 - Privacy URL: https://xnu.app/tabcarry/privacy/
+- Chrome Web Store URL: https://chromewebstore.google.com/detail/tabcarry-%E2%80%94-save-restore-t/eemmceflpbemalamboiahniolcgalpfl
 - `.github/workflows/pages.yml` builds and deploys `.site/` on pushes to `main`. Run `npm run release` and `npm run site:build` locally. The policy page is generated from `PRIVACY_POLICY.md`; screenshots and the installable ZIP are included automatically.
 - Developer dashboard: https://chrome.google.com/webstore/devconsole/
 - Official instructions: https://developer.chrome.com/docs/webstore/publish
