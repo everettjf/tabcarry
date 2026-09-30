@@ -49,7 +49,6 @@ import {
   type Preferences,
   type Target,
   type SavedTab,
-  type Scope,
 } from "./model";
 import { parseBackup, MAX_BYTES } from "./backup";
 import { translator, type Word } from "./i18n";
@@ -84,6 +83,29 @@ function Logo() {
       <span />
       <span />
     </span>
+  );
+}
+function ScopeSelect({
+  value,
+  busy,
+  t,
+  onChange,
+}: {
+  value: "all" | "window";
+  busy: boolean;
+  t: ReturnType<typeof translator>;
+  onChange: (scope: "all" | "window") => void;
+}) {
+  return (
+    <select
+      aria-label={t("savingScope")}
+      value={value}
+      disabled={busy}
+      onChange={(e) => onChange(e.target.value as "all" | "window")}
+    >
+      <option value="all">{t("saveAll")}</option>
+      <option value="window">{t("saveWindow")}</option>
+    </select>
   );
 }
 function Dialog({
@@ -327,7 +349,7 @@ function App() {
         kept: number;
       }>({
         type: close ? "saveClose" : "save",
-        scope: preferences.scope,
+        scope: saveScope,
         target: targetRef.current,
         requestId: lastSave.current.id,
       });
@@ -385,27 +407,15 @@ function App() {
       });
     });
   }
-  const scopeCount =
-    context?.[
-      preferences.scope === "all"
-        ? "all"
-        : preferences.scope === "window"
-          ? "window"
-          : "selected"
-    ] || 0;
-  const ScopeSelect = () => (
-    <select
-      aria-label={t("savingScope")}
-      value={preferences.scope}
-      disabled={busy}
-      onChange={(e) =>
-        void task(() => setting({ scope: e.target.value as Scope }))
-      }
-    >
-      <option value="all">{t("saveAll")}</option>
-      <option value="window">{t("saveWindow")}</option>
-      <option value="selected">{t("saveSelected")}</option>
-    </select>
+  const saveScope = preferences.scope === "all" ? "all" : "window";
+  const scopeCount = context?.[saveScope] || 0;
+  const scopeSelect = (
+    <ScopeSelect
+      value={saveScope}
+      busy={busy}
+      t={t}
+      onChange={(scope) => void task(() => setting({ scope }))}
+    />
   );
   function sessionActions(s: Session) {
     return (
@@ -659,7 +669,7 @@ function App() {
             <p>
               {qty(context?.windows || 0, "windows")} · {t("local")}
             </p>
-            <ScopeSelect />
+            {scopeSelect}
             <button
               className="primary wide"
               disabled={busy || !scopeCount}
@@ -725,7 +735,7 @@ function App() {
               </h1>
             </div>
             <div className="save-controls">
-              <ScopeSelect />
+              {scopeSelect}
               <button
                 className="primary"
                 disabled={busy || !scopeCount}

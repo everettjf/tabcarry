@@ -22,7 +22,7 @@ Upload `releases/TabCarry-1.0.0.zip`, not the repository ZIP. The package must c
 
 Save what you have open. Come back when you’re ready.
 
-TabCarry keeps named snapshots of your browser windows and tabs on your own device. Save all windows, just the current window, or selected tabs. Reopen the original window structure or choose only the pages you need.
+TabCarry keeps named snapshots of your browser windows and tabs on your own device. Save all windows or just the current window. Reopen the original window structure or choose only the pages you need.
 
 - Preserve window structure, tab order, pinned tabs and Chrome tab groups.
 - Search saved sessions by name, page title or URL.
