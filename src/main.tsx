@@ -709,6 +709,13 @@ function App() {
           </section>
           {jobs.slice(0, 1).map(statusReport)}
           <footer className="popup-footer">
+            <a
+              href="https://discord.gg/eGzEaP6TzR"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discord
+            </a>
             <button
               onClick={() =>
                 void task(async () => {
@@ -1184,6 +1191,13 @@ function App() {
             </section>
           </main>
           <footer className="main-footer">
+            <a
+              href="https://discord.gg/eGzEaP6TzR"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Discord
+            </a>
             <span>
               <ShieldCheck size={14} />
               {t("localNote")}

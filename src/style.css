@@ -669,6 +669,21 @@ kbd {
   color: var(--muted);
   gap: 15px;
 }
+.main-footer a,
+.popup-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.main-footer a:hover,
+.popup-footer a:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+.popup-footer a {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
 .main-footer span {
   display: flex;
   align-items: center;

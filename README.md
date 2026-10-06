@@ -1,5 +1,7 @@
 # TabCarry
 
+[Discord](https://discord.gg/eGzEaP6TzR)
+
 **Save your tabs. Come back ready.**
 
 A local-only Chrome extension for saving and restoring browser windows, tabs and groups. No account, cloud sync, analytics, remote favicons or content scripts.
