@@ -16,6 +16,7 @@ import {
 } from "./restore";
 import {
   defaults,
+  themes,
   supported,
   errorText,
   type Command,
@@ -41,7 +42,7 @@ async function prefs(value?: Partial<Preferences>) {
   const stored = await chrome.storage.local.get("preferences");
   const old = { ...defaults, ...stored.preferences };
   if (value) {
-    if (value.theme && !["system", "light", "dark"].includes(value.theme))
+    if (value.theme && !themes.includes(value.theme))
       throw Error("Invalid theme");
     if (value.language && !["system", "en", "zh"].includes(value.language))
       throw Error("Invalid language");

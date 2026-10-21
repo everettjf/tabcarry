@@ -34,8 +34,18 @@ export type Session = {
   source: "manual" | "import";
   windows: SavedWindow[];
 };
+export const themes = [
+  "system",
+  "light",
+  "dark",
+  "sand",
+  "forest",
+  "dusk",
+  "midnight",
+] as const;
+export type Theme = (typeof themes)[number];
 export type Preferences = {
-  theme: "system" | "light" | "dark";
+  theme: Theme;
   language: "system" | "en" | "zh";
   scope: Scope;
 };

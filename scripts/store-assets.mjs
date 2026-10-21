@@ -97,7 +97,10 @@ try {
   await page.screenshot({ path: "docs/store/restore.png" });
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByLabel("Appearance").selectOption("dark");
+  await page.locator(".theme-dark").click();
+  await page.waitForFunction(
+    () => document.documentElement.dataset.theme === "dark",
+  );
   await page
     .getByRole("dialog")
     .getByRole("button", { name: "Close", exact: true })

@@ -1,4 +1,18 @@
-# TabCarry 1.0.0 validation
+# TabCarry validation
+
+## Appearance and interface refinement — 2026-10-21
+
+Default light/dark palettes now use warm paper and warm charcoal backgrounds inspired by [OnePage’s palette](https://github.com/ivaneye/OnePage/blob/master/theme.css), with restrained teal accents. Small UI text has stronger contrast than the reference. Sand, Forest, Dusk and Midnight are optional palettes; System follows OS appearance. Settings provide keyboard-accessible radio cards with palette previews. Changes preview immediately, roll back on save failure, persist locally, and synchronize across extension pages.
+
+The 560px popup now groups save controls side by side, uses a separate save card, shows session icons and full-name tooltips, and places library navigation beside the community link. The library uses consistent colors, focus states and selected rows; shortcut hints follow the platform. Theme changes do not interpolate colors.
+
+Validation includes all six palettes in the library and real native toolbar popup, English/Chinese settings layout, cross-page preference synchronization, OS light/dark changes, and browser restart persistence. Automated contrast checks require at least 4.5:1 for body text, muted text, selected-session metadata and primary-button labels. Screenshots are generated for every palette, plus settings and native popups. The existing capture, restore, backups, trash and scale acceptance checks remain part of the suite.
+
+## Native toolbar popup width — 2026-10-21
+
+The previous `.popup { width: 460px; max-width: 100vw }` resolved to a 185px native toolbar viewport in Chrome for Testing. A normal tab with an explicitly set viewport did not detect this. The popup document now declares its own 560px width, and the app fills it.
+
+`npm run test:popup` opens the actual toolbar popup with `chrome.action.openPopup()` in an isolated, visible browser profile, without viewport emulation. English/dark and Chinese/light both measured a 560px viewport and app, no horizontal overflow, a fully visible date-based session title, and single-line metadata. Running the same test against a temporary build with the old width rules reproduced 185px and failed the width assertion. Production build and the existing Chrome acceptance suite also passed after the fix.
 
 Date: 2026-09-24. This report distinguishes isolated browser tests from ongoing personal use.
 

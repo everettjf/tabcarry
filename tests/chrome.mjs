@@ -212,12 +212,98 @@ try {
   await page.bringToFront();
   await page.waitForFunction(() => !document.hidden);
   await page.waitForTimeout(2500);
+  const synced = await ctx.newPage();
+  await synced.goto(`chrome-extension://${extensionId}/manager.html`);
+  await synced.getByRole("button", { name: "Settings", exact: true }).waitFor();
+  await page.bringToFront();
+  for (const theme of ["light", "sand", "forest", "dusk", "midnight", "dark"]) {
+    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.locator(`.theme-choice:has(input[value="${theme}"])`).click();
+    await page.waitForFunction(
+      (theme) => document.documentElement.dataset.theme === theme,
+      theme,
+    );
+    await synced.waitForFunction(
+      (theme) => document.documentElement.dataset.theme === theme,
+      theme,
+    );
+    assert.equal((await rpc({ type: "prefs" })).theme, theme);
+    if (theme === "light") {
+      await page.screenshot({
+        path: join(output, "themes-settings.png"),
+        fullPage: true,
+      });
+    }
+    await page
+      .getByRole("dialog")
+      .getByRole("button", { name: "Close", exact: true })
+      .click();
+    const ratios = await page.evaluate(() => {
+      const luminance = (color) => {
+        const values = color
+          .match(/[\d.]+/g)
+          .slice(0, 3)
+          .map(Number)
+          .map((n) => {
+            const c = n / 255;
+            return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+          });
+        return values[0] * 0.2126 + values[1] * 0.7152 + values[2] * 0.0722;
+      };
+      const contrast = (a, b) => {
+        const x = luminance(a),
+          y = luminance(b);
+        return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+      };
+      const body = getComputedStyle(document.documentElement);
+      const primary = getComputedStyle(
+        document.querySelector("button.primary"),
+      );
+      const muted = getComputedStyle(document.querySelector(".eyebrow"));
+      const selected = getComputedStyle(
+        document.querySelector(".session-item.chosen"),
+      );
+      const selectedMeta = getComputedStyle(
+        document.querySelector(".session-item.chosen small"),
+      );
+      return {
+        selected: contrast(selectedMeta.color, selected.backgroundColor),
+        text: contrast(body.color, body.backgroundColor),
+        muted: contrast(muted.color, body.backgroundColor),
+        button: contrast(primary.color, primary.backgroundColor),
+      };
+    });
+    for (const [kind, ratio] of Object.entries(ratios)) {
+      assert(
+        ratio >= 4.5,
+        `${theme} ${kind} contrast ${ratio.toFixed(2)} must meet 4.5:1`,
+      );
+    }
+    await page.screenshot({
+      path: join(output, `library-${theme}.png`),
+      fullPage: true,
+    });
+  }
+  // System mode responds to OS appearance changes in both directions.
+  await page.emulateMedia({ colorScheme: "light" });
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByLabel("Appearance").selectOption("dark");
+  await page.locator(".theme-system").click();
+  await page.waitForFunction(
+    () => document.documentElement.dataset.theme === "light",
+  );
+  await page.emulateMedia({ colorScheme: "dark" });
+  await page.waitForFunction(
+    () => document.documentElement.dataset.theme === "dark",
+  );
+  await page.locator(".theme-dark").click();
   await page
     .getByRole("dialog")
     .getByRole("button", { name: "Close", exact: true })
     .click();
+  await synced.close();
+  logs.push(
+    "Themes: six palettes, live settings, cross-page sync, system appearance changes, text/button contrast >= 4.5:1.",
+  );
   await page.screenshot({
     path: join(output, "03-library-dark.png"),
     fullPage: true,
@@ -244,7 +330,7 @@ try {
   await page.getByLabel("Language").selectOption("zh");
   await page
     .getByRole("dialog")
-    .getByRole("button", { name: "Close", exact: true })
+    .getByRole("button", { name: "关闭", exact: true })
     .click();
   await page.screenshot({
     path: join(output, "06-chinese.png"),

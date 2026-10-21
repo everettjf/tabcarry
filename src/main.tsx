@@ -17,8 +17,6 @@ import {
   Download,
   Upload,
   Settings,
-  Sun,
-  Moon,
   Monitor,
   Trash2,
   X,
@@ -37,6 +35,7 @@ import {
 import { api, download } from "./client";
 import {
   defaults,
+  themes,
   uid,
   count,
   domain,
@@ -223,6 +222,15 @@ function App() {
       .catch((e) => setError(errorText(e)));
     void refresh().catch((e) => setError(errorText(e)));
     void refreshContext();
+    const syncPreferences = (
+      changes: Record<string, chrome.storage.StorageChange>,
+      area: string,
+    ) => {
+      if (area === "local" && changes.preferences) {
+        setPreferences({ ...defaults, ...changes.preferences.newValue });
+      }
+    };
+    chrome.storage.onChanged.addListener(syncPreferences);
     if (chrome.action) void chrome.action.setBadgeText({ text: "" });
     const resume = () => {
       if (!document.hidden) {
@@ -235,6 +243,7 @@ function App() {
     const timer = setInterval(resume, 2000);
     return () => {
       clearInterval(timer);
+      chrome.storage.onChanged.removeListener(syncPreferences);
       document.removeEventListener("visibilitychange", resume);
       window.removeEventListener("focus", resume);
     };
@@ -335,8 +344,15 @@ function App() {
     }
   }
   async function setting(value: Partial<Preferences>) {
-    const result = await api<Preferences>({ type: "prefs", value });
-    setPreferences(result);
+    const previous = preferences;
+    setPreferences({ ...preferences, ...value });
+    try {
+      const result = await api<Preferences>({ type: "prefs", value });
+      setPreferences(result);
+    } catch (error) {
+      setPreferences(previous);
+      throw error;
+    }
   }
   async function save(close = false) {
     await task(async () => {
@@ -602,7 +618,7 @@ function App() {
                 <X size={15} />
               </button>
             ) : (
-              <kbd>⌘ F</kbd>
+              <kbd>{navigator.platform.includes("Mac") ? "⌘ F" : "Ctrl F"}</kbd>
             )}
           </div>
         )}
@@ -664,24 +680,26 @@ function App() {
           <section className="quick-save">
             <span className="eyebrow">{t("saveScopeCount")}</span>
             <h1>
-              {scopeCount} <span>{t("tabs")}</span>
+              {context ? scopeCount : "–"} <span>{t("tabs")}</span>
             </h1>
             <p>
               {qty(context?.windows || 0, "windows")} · {t("local")}
             </p>
-            {scopeSelect}
-            <button
-              className="primary wide"
-              disabled={busy || !scopeCount}
-              onClick={() => void save()}
-            >
-              {busy ? (
-                <LoaderCircle size={17} className="spin" />
-              ) : (
-                <Plus size={18} />
-              )}{" "}
-              {t(busy ? "saving" : "save")}
-            </button>
+            <div className="quick-actions">
+              {scopeSelect}
+              <button
+                className="primary wide"
+                disabled={busy || !scopeCount}
+                onClick={() => void save()}
+              >
+                {busy ? (
+                  <LoaderCircle size={17} className="spin" />
+                ) : (
+                  <Plus size={18} />
+                )}{" "}
+                {t(busy ? "saving" : "save")}
+              </button>
+            </div>
           </section>
           <section className="recent">
             <div className="section-label">{t("recent")}</div>
@@ -691,9 +709,15 @@ function App() {
               .map((s) => (
                 <button
                   className="recent-item"
+                  title={s.name}
                   key={s.id}
                   onClick={() => restore(s)}
                 >
+                  <Layers
+                    size={18}
+                    className="recent-symbol"
+                    aria-hidden="true"
+                  />
                   <span>
                     <b>{s.name}</b>
                     <small>
@@ -815,6 +839,7 @@ function App() {
                         setSelectedId(s.id);
                         setMobileDetail(true);
                       }}
+                      title={s.name}
                       aria-current={chosen?.id === s.id ? "true" : undefined}
                     >
                       <span className="session-symbol">
@@ -1432,25 +1457,44 @@ function App() {
           )}
           {modal.kind === "settings" && (
             <>
-              <label className="field">
-                {t("theme")}
-                <select
-                  value={preferences.theme}
-                  onChange={(e) =>
-                    void task(() =>
-                      setting({
-                        theme: e.target.value as Preferences["theme"],
-                      }),
-                    )
-                  }
-                >
-                  {(["system", "light", "dark"] as const).map((key) => (
-                    <option key={key} value={key}>
-                      {t(key)}
-                    </option>
+              <fieldset className="theme-field">
+                <legend>{t("theme")}</legend>
+                <p className="hint">{t("themeNote")}</p>
+                <div className="theme-grid">
+                  {themes.map((key) => (
+                    <label key={key} className={`theme-choice theme-${key}`}>
+                      <input
+                        type="radio"
+                        name="theme"
+                        value={key}
+                        checked={preferences.theme === key}
+                        onChange={() =>
+                          void task(() => setting({ theme: key }))
+                        }
+                      />
+                      <span className="theme-preview" aria-hidden="true">
+                        <span className="preview-sidebar" />
+                        <span className="preview-content">
+                          <i />
+                          <i />
+                          <i />
+                        </span>
+                      </span>
+                      <span className="theme-name">
+                        {t(key)}
+                        {preferences.theme === key && (
+                          <Check size={13} aria-hidden="true" />
+                        )}
+                      </span>
+                    </label>
                   ))}
-                </select>
-              </label>
+                </div>
+                <p className="hint theme-description">
+                  {preferences.theme === "system"
+                    ? t("systemNote")
+                    : t("themeSync")}
+                </p>
+              </fieldset>
               <label className="field">
                 {t("language")}
                 <select
@@ -1482,7 +1526,7 @@ function App() {
                 <Download size={16} />
                 {t("export")}
               </button>
-              <p className="version">TabCarry 1.0.1 · {t("local")}</p>
+              <p className="version">TabCarry 1.0.2 · {t("local")}</p>
             </>
           )}
           {modal.kind === "privacy" && (

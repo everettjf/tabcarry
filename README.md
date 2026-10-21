@@ -19,7 +19,7 @@ A local-only Chrome extension for saving and restoring browser windows, tabs and
 - Export and import versioned JSON backups, with validation, duplicate detection and conflict copies.
 - Save and close tabs as a separate, explicit action. Storage must succeed before any tab closes.
 - See restore progress, stop subsequent openings and retry unfinished items. Uncertain results are identified separately.
-- Use light/dark/system appearance, English/简体中文 and keyboard navigation.
+- Choose system appearance, warm light/dark palettes inspired by [OnePage](https://github.com/ivaneye/OnePage), or Sand, Forest, Dusk and Midnight. Theme changes apply to the popup and open library pages. English/简体中文 and keyboard navigation are supported.
 
 ## Install locally
 
@@ -30,7 +30,7 @@ A local-only Chrome extension for saving and restoring browser windows, tabs and
 
 Chrome 120+ is required. Configure keyboard shortcuts at `chrome://extensions/shortcuts`. The suggested save shortcut is **Alt+Shift+S**.
 
-`npm run release` creates `releases/TabCarry-1.0.1.zip` with the manifest at its root. This ZIP is the Chrome Web Store upload package; unpack it before using **Load unpacked**.
+`npm run release` creates `releases/TabCarry-1.0.2.zip` with the manifest at its root. This ZIP is the Chrome Web Store upload package; unpack it before using **Load unpacked**.
 
 ## Data and limits
 
@@ -50,7 +50,10 @@ npm run check
 npm run build
 npx playwright install chromium
 npm run test:chrome
+npm run test:popup
 ```
+
+`test:popup` opens a real toolbar popup in a separate, visible Chrome for Testing profile. It checks the native 560px viewport, horizontal overflow, and date-based recent-session titles in all six palettes and Chinese/light mode, including the native settings dialog. It does not set a simulated popup viewport.
 
 The browser test creates its own temporary Chrome for Testing profile and local HTTP server. It never reads your everyday Chrome profile. Override `PLAYWRIGHT_BROWSERS_PATH` if using a separate browser cache. Test screenshots/reports default to the operating system temp directory and can be overridden with `TABCARRY_QA_DIR`.
 
@@ -60,7 +63,7 @@ The browser test creates its own temporary Chrome for Testing profile and local 
 - [Privacy policy](PRIVACY_POLICY.md)
 - [Store publishing checklist](docs/publishing.md)
 
-**Release status:** 1.0.0 is on Chrome Web Store. Version 1.0.1 is prepared for the next upload. Automatic snapshots, updating existing sessions and competitor imports are future work.
+**Release status:** 1.0.0 is on Chrome Web Store. Version 1.0.2 is prepared for the next upload. Automatic snapshots, updating existing sessions and competitor imports are future work.
 
 ## Product website
 

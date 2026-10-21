@@ -1,6 +1,6 @@
-# Publishing TabCarry 1.0.1
+# Publishing TabCarry 1.0.2
 
-Status: version 1.0.0 is published. Upload version 1.0.1 to the existing TabCarry item.
+Status: version 1.0.0 is published. Upload version 1.0.2 to the existing TabCarry item.
 
 ## Build
 
@@ -10,7 +10,7 @@ npm run check
 npm run release
 ```
 
-Upload `releases/TabCarry-1.0.1.zip` to the existing item's Package tab, not the repository ZIP. The package must contain `manifest.json` at its root. A subsequent upload must use a higher version in both package.json and public/manifest.json, and any displayed version strings.
+Upload `releases/TabCarry-1.0.2.zip` to the existing item's Package tab, not the repository ZIP. The package must contain `manifest.json` at its root. A subsequent upload must use a higher version in both package.json and public/manifest.json, and any displayed version strings.
 
 ## Store copy
 
