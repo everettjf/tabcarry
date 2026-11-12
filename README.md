@@ -6,7 +6,7 @@
 
 A local-only Chrome extension for saving and restoring browser windows, tabs and groups. No account, cloud sync, analytics, remote favicons or content scripts.
 
-[Chrome Web Store](https://chromewebstore.google.com/detail/tabcarry-%E2%80%94-save-restore-t/eemmceflpbemalamboiahniolcgalpfl) · [Website](https://xnu.app/tabcarry/) · [Privacy policy](https://xnu.app/tabcarry/privacy/)
+[Chrome Web Store](https://chromewebstore.google.com/detail/tabcarry-%E2%80%94-save-restore-t/eemmceflpbemalamboiahniolcgalpfl) · [Website](https://atomsprout.com/tabcarry/) · [Privacy policy](https://atomsprout.com/tabcarry/privacy/)
 
 ## What you can do
 

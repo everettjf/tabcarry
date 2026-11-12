@@ -175,7 +175,7 @@ RestoreJob: id, sessionId, sessionRevision, target, options, items[], status
 
 1.0.0 已完成三轮开发并通过自动化与隔离 Chrome for Testing 原生 API 验收，详见 validation.md。尚未上传 Chrome Web Store，尚未进行规划中的 7 天日常使用观察。自动快照、更新已有会话等仍是后续功能。
 
-产品网站和隐私页已在本仓库 docs/site 中实现，通过 GitHub Actions 构建发布至 https://xnu.app/tabcarry/ 和 https://xnu.app/tabcarry/privacy/ 。官网以 Chrome Web Store 安装为入口，目前标注即将上线。产品规划 Markdown 不应被直接当作对外功能承诺。
+产品网站和隐私页已在本仓库 docs/site 中实现，通过 GitHub Actions 构建发布至 https://atomsprout.com/tabcarry/ 和 https://atomsprout.com/tabcarry/privacy/ 。官网以 Chrome Web Store 安装为入口，目前标注即将上线。产品规划 Markdown 不应被直接当作对外功能承诺。
 
 ### 本轮整体复查与优先级
 

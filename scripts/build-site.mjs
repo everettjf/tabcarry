@@ -20,8 +20,8 @@ function inline(text) {
       '<a href="https://github.com/everettjf/tabcarry/issues" rel="noopener noreferrer">GitHub issues</a>',
     )
     .replace(
-      /xnuapp@gmail\.com/g,
-      '<a href="mailto:xnuapp@gmail.com">xnuapp@gmail.com</a>',
+      /atomsprout@gmail\.com/g,
+      '<a href="mailto:atomsprout@gmail.com">atomsprout@gmail.com</a>',
     );
 }
 // Deliberately limited to the paragraphs, headings and lists in our own policy source.

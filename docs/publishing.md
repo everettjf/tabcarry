@@ -51,8 +51,8 @@ Disclosures must accurately reflect local processing of page titles and full URL
 - Icons: `public/icons/128.png` and the smaller sizes.
 - Screenshots: `docs/store/` (actual extension UI with demonstration records; not real personal sessions).
 - Product/policy HTML: `docs/site/index.html`, `docs/site/privacy/index.html`.
-- Product URL: https://xnu.app/tabcarry/
-- Privacy URL: https://xnu.app/tabcarry/privacy/
+- Product URL: https://atomsprout.com/tabcarry/
+- Privacy URL: https://atomsprout.com/tabcarry/privacy/
 - Chrome Web Store URL: https://chromewebstore.google.com/detail/tabcarry-%E2%80%94-save-restore-t/eemmceflpbemalamboiahniolcgalpfl
 - `.github/workflows/pages.yml` builds and deploys `.site/` on pushes to `main`. Run `npm run release` and `npm run site:build` locally. The policy page is generated from `PRIVACY_POLICY.md`; screenshots and the installable ZIP are included automatically.
 - Developer dashboard: https://chrome.google.com/webstore/devconsole/

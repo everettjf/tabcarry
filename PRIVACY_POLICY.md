@@ -28,4 +28,4 @@ No host permissions or content scripts are requested. Website contents and login
 
 ## Contact
 
-Contact the developer at xnuapp@gmail.com or through https://github.com/everettjf/tabcarry/issues. Do not attach personal session backups or sensitive URLs to public issues.
+Contact the developer at atomsprout@gmail.com or through https://github.com/everettjf/tabcarry/issues. Do not attach personal session backups or sensitive URLs to public issues.
